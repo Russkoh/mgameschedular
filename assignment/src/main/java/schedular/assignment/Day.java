@@ -6,6 +6,8 @@ public class Day {
 	private Game[] games;
 	
 	public Day(){
+		//Default constructor
+		
 		
 	}
 	
@@ -26,7 +28,7 @@ public class Day {
 		return this.games;
 	}
 	
-	public void setGames(Game games[]){
+	public void setGames(Game[] games){
 		this.games = games;
 	}
 }

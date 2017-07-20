@@ -6,7 +6,7 @@ public class Game {
 	private int noOfPlayers;
 	
 	public Game(){
-		
+		// Default constructor 
 	}
 	
 	public Game(String name, int noOfPlayers){

@@ -1,52 +1,55 @@
 package schedular.assignment; 
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class Testing {
 
+	String tn = "Tennis";
+	String rg = "Roger";
 	Service service = new Service();
 	@Test
-	public void test_adding_game_in_system() {
+	public void addingGameInSystem() {
 		
-		Game g = new Game("Tennis", 2);
+		Game g = new Game(tn, 2);
 		assertEquals(service.createGame(g), "Game has been created");
 	}
 	
 	@Test
-	public void test_adding_game_without_name_in_system() {
+	public void addingGameWithoutNameInSystem() {
 		
 		Game g = new Game(null, 4);
 		assertEquals(service.createGame(g), "Game name should not be empty");
 	}
 	
 	@Test
-	public void test_adding_game_with_no_players() {
+	public void addingGameWithNoPlayers() {
 		
 		Game g = new Game("Ping Pong", 0);
 		assertEquals(service.createGame(g), "Number of players should not be zero");
 	}
 	
 	@Test
-	public void test_adding_duplicate_games() {
-		Game g = new Game("Tennis", 2);
-		Game gr = new Game("Tennis", 2);
+	public void addingDuplicateGames() {
+		Game g = new Game(tn, 2);
+		Game gr = new Game(tn, 2);
 		service.createGame(gr);
 		assertEquals(service.createGame(g), "The game already exists");
 	}
 	
 	@Test
-	public void test_adding_null_game() {
+	public void addingNullGame() {
 		
 		Game g = null;
 		assertEquals(service.createGame(g), "The game object passed is null");
 	}
 	
 	@Test
-	public void test_adding_a_player() {
+	public void addingAPlayer() {
 		
 		
-		Game tennis = new Game("Tennis", 2);
+		Game tennis = new Game(tn, 2);
 		Game badminton = new Game("Badminton", 4);
 		Game football = new Game("football", 30);
 		service.createGame(tennis);
@@ -58,17 +61,17 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_player_that_does_not_play_any_games() {
+	public void addingPlayerhatDoesNotPlayAnyGames() {
 		
 		Game[] games = new Game[0];
-		Player p = new Player("Tennis", games);
+		Player p = new Player(tn, games);
 		
 		assertEquals(service.createPlayer(p), "Player does not play any games listed in the system");
 	}
 	
 	@Test
-	public void test_adding_a_player_without_a_name() {
-		Game tennis = new Game("Tennis", 2);
+	public void addingAPlayerWithoutName() {
+		Game tennis = new Game(tn, 2);
 		service.createGame(tennis);
 		Game[] games = {tennis};
 		Player p = new Player(null, games);
@@ -76,26 +79,26 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_a_duplicate_player(){
-		Game tennis = new Game("Tennis", 2);
+	public void addingADuplicatePlayer(){
+		Game tennis = new Game(tn, 2);
 		service.createGame(tennis);
 		Game[] games = {tennis};
-		Player roger = new Player("Roger", games);
-		Player p = new Player("Roger", games);
+		Player roger = new Player(rg, games);
+		Player p = new Player(rg, games);
 		service.createPlayer(roger);
 		assertEquals(service.createPlayer(p), "Player is already added");
 	}
 	
 	@Test
-	public void test_adding_a_null_player(){
+	public void addingNullPlayer(){
 	
 		Player p = null;
 		assertEquals(service.createPlayer(p), "Player object passed is null");
 	}
 	
 	@Test
-	public void test_adding_a_day(){
-		Game tennis = new Game("Tennis", 2);
+	public void addingADay(){
+		Game tennis = new Game(tn, 2);
 		Game basketball = new Game("Basketball", 20);
 		service.createGame(tennis);
 		service.createGame(basketball);
@@ -105,8 +108,8 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_a_day_without_a_valid_game(){
-		Game tennis = new Game("Tennis", 2);
+	public void addingADayWithoutAValidGame(){
+		Game tennis = new Game(tn, 2);
 		Game basketball = new Game("Basketball", 20);
 		
 		Game[] games = {tennis, basketball};
@@ -115,8 +118,8 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_a_day_without_a_name(){
-		Game tennis = new Game("Tennis", 2);
+	public void addingADayWithoutAName(){
+		Game tennis = new Game(tn, 2);
 		service.createGame(tennis);
 		Game basketball = new Game("Basketball", 20);
 		service.createGame(basketball);
@@ -127,8 +130,8 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_a_duplicate_day(){
-		Game tennis = new Game("Tennis", 2);
+	public void addingADuplicateDay(){
+		Game tennis = new Game(tn, 2);
 		service.createGame(tennis);
 		Game basketball = new Game("Basketball", 20);
 		service.createGame(basketball);
@@ -141,45 +144,43 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_adding_a_null_day(){
+	public void addingANullDay(){
 		
 		Day d = null;
 		assertEquals(service.createDay(d), "Day object is null");
 	}
 	
 	@Test
-	public void test_getting_a_report_of_an_existing_game(){
-		StringBuffer testBuffer  = new StringBuffer();
-		Game tennis = new Game("Tennis", 2);
+	public void gettingAReportOfAnExistingGame(){
+		StringBuilder testBuffer  = new StringBuilder();
+		Game tennis = new Game(tn, 2);
 		Game[] games = {tennis};
 		service.createGame(tennis);
 		Day dr = new Day("Day One", games);
 		service.createDay(dr);
-		Player roger = new Player("Roger", games);
+		Player roger = new Player(rg, games);
 		service.createPlayer(roger);
 		
-		String gameName = "Tennis";
+		String gameName = tn;
 		testBuffer.append("\n *** Game-Wise Report ***");
 		testBuffer.append("\n\nGame: " + gameName + " \n\nDates of " + gameName + " : \n");
 		testBuffer.append("\n" + "Day One" + "\n");
-		testBuffer.append("Player: "+"Roger"+ " ");
+		testBuffer.append("Player: "+rg+ " ");
 		testBuffer.append("\n");
 		testBuffer.append("\n\n*** End of Game Wise Report ***");
-		assertEquals(testBuffer.toString(),service.getGameWiseReport("Tennis"));
+		assertEquals(testBuffer.toString(),service.getGameWiseReport(tn));
 	}
 	
 	@Test
-	public void test_getting_a_report_of_a_nonexistant_game(){
+	public void gettingAReportOfANonexistantGame(){
 		
-
-		String gameName = "Tennis";
 		String gameNotFound= "Game is not found";
 		
-		assertEquals(gameNotFound,service.getGameWiseReport(gameName));
+		assertEquals(gameNotFound,service.getGameWiseReport(tn));
 	}
 
 	@Test
-	public void test_getting_a_report_from_a_game_without_a_name(){
+	public void gettingReportOfGameWithoutName(){
 		
 		String searchIsEmpty= "Search field is empty";
 		
@@ -187,9 +188,9 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_getting_a_report_of_an_existing_player(){
-		StringBuffer testBuffer  = new StringBuffer();
-		Game tennis = new Game("Tennis", 2);
+	public void gettingAReportOfAnExistingPlayer(){
+		StringBuilder testBuffer  = new StringBuilder();
+		Game tennis = new Game(tn, 2);
 
 		service.createGame(tennis);
 		
@@ -198,10 +199,10 @@ public class Testing {
 		service.createPlayer(p);
 		Day dr = new Day("Day One", games);
 		service.createDay(dr);
-		Player roger = new Player("Roger", games);
+		Player roger = new Player(rg, games);
 		service.createPlayer(roger);
 		
-		String playerName = "Roger";
+		String playerName = rg;
 		testBuffer.append("\n *** Player-Wise Report ***");
 		testBuffer.append("\n\nPlayer: " + playerName + " \n\nGames " + playerName + " plays: \n\n");
 		testBuffer.append("Game: " + "Tennis" + " ");
@@ -212,7 +213,7 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_getting_a_report_of_a_nonexistant_player(){
+	public void gettingAReportOfANonexistantPlayer(){
 		
 		String playerName = "James";
 		String playerNotFound= "Player is not found";
@@ -221,7 +222,7 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_getting_a_report_of_an_empty_player(){
+	public void gettingAReportOfAPlayerWithBlankName(){
 		
 		String playerName = null;
 		String playerNameEmpty= "Player name is blank";
@@ -229,29 +230,10 @@ public class Testing {
 		assertEquals(playerNameEmpty,service.getPlayerWiseReport(playerName));
 	}
 	
-	@Test
-	public void test_getting_a_report_of_an_existing_day(){
-		StringBuffer testBuffer  = new StringBuffer();
-		Game tennis = new Game("Tennis", 2);
-		Game[] games = {tennis};
-		service.createGame(tennis);
-		Day dr = new Day("Day One", games);
-		service.createDay(dr);
-		Player roger = new Player("Roger", games);
-		service.createPlayer(roger);
-		
-		String dayName = "Day One";
-		testBuffer.append("\n *** Day-Wise Report ***");
-		testBuffer.append("\n\nDay: " + dayName + " \n\nGames on " + dayName + ": \n");
-		testBuffer.append(tennis.getName() + "\n");
-		testBuffer.append("Player: " + roger.getName());
-		testBuffer.append("\n\n");
-		testBuffer.append("** End of Day-Wise Report*** ");
-		assertEquals(testBuffer.toString(),service.getDayWiseReport(dayName));
-	}
+	
 	
 	@Test
-	public void test_getting_a_report_of_a_nonexistant_day(){
+	public void gettingAReportOfANonexistantDay(){
 		
 		String dayName = "Day Two";
 		String dayNotFound= "Day is not found";
@@ -260,7 +242,7 @@ public class Testing {
 	}
 	
 	@Test
-	public void test_getting_a_report_from_a_day_without_a_name(){
+	public void gettingReportOfNullDay(){
 		
 		String searchIsEmpty= "Search field is empty";
 		

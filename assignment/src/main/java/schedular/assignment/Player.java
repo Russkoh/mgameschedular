@@ -5,7 +5,7 @@ public class Player {
 	private Game[] games;
 	
 	public Player(){
-		
+		// Default constructor
 	}
 	
 	public Player(String name, Game[] games){
@@ -26,7 +26,7 @@ public class Player {
 		return this.games;
 	}
 	
-	public void setGames(Game games[]){
+	public void setGames(Game[] games){
 		this.games = games;
 	}
 }

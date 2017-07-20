@@ -21,7 +21,7 @@ public class Service implements ISchedularService{
 		createPlayer(tim);
 		createPlayer(roger);
 		
-		Day d = new Day("Day One", timGames);
+		Day d = new Day(setName("Day One"),setGames( timGames));
 		
 		Day d2 = new Day("Day Two", bball);
 		createDay(d);
@@ -126,7 +126,7 @@ public class Service implements ISchedularService{
 		
 		
 		
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("\n *** Game-Wise Report ***");
 		buff.append("\n\nGame: " + name + " \n\nDates of " + name + " : \n");
 		for(int i = 0; i< dayReport.findAll().length;i++){
@@ -157,7 +157,7 @@ public class Service implements ISchedularService{
 
 	public String playerWiseReport(String playerName){
 		
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("\n *** Player-Wise Report ***");
 		buff.append("\n\nPlayer: " + playerName + " \n\nGames " + playerName + " plays: \n\n");
 		for(int i = 0; i< playerReport.findAll().length;i++){
@@ -184,7 +184,7 @@ public class Service implements ISchedularService{
 
 	public String dayWiseReport(String dayName){
 		
-		StringBuffer buff = new StringBuffer();
+		StringBuilder buff = new StringBuilder();
 		buff.append("\n *** Day-Wise Report ***");
 		buff.append("\n\nDay: " + dayName + " \n\nGames on " + dayName + ": \n");
 		for(int j = 0; j< dayReport.findAll().length; j++){

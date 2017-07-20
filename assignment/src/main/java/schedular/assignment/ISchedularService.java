@@ -7,8 +7,8 @@ public interface ISchedularService {
 	public String createDay(Day d);
 	
 	public String gameWiseReport(String gameName);
-	//public String playerWiseReport(String playerName);
-	//public String dayWiseReport(String dayName);
+	public String playerWiseReport(String playerName);
+	public String dayWiseReport(String dayName);
 	
 	
 }
